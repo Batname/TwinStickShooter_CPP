@@ -5,6 +5,9 @@
 
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
+#include "Components/InputComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
+#include "GameFramework/Controller.h"
 
 AHeroCharacter::AHeroCharacter()
 {
@@ -27,5 +30,47 @@ AHeroCharacter::AHeroCharacter()
 }
 
 
+void AHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
+{
+	Super::SetupPlayerInputComponent(PlayerInputComponent);
+
+	PlayerInputComponent->BindAxis("MoveUp", this, &AHeroCharacter::MoveUp);
+	PlayerInputComponent->BindAxis("MoveRight", this, &AHeroCharacter::MoveRight);
+	PlayerInputComponent->BindAxis("LookUp", this, &AHeroCharacter::RotateCharacter);
+	PlayerInputComponent->BindAxis("LookRight", this, &AHeroCharacter::RotateCharacter);
+}
 
 
+void AHeroCharacter::MoveUp(float Value)
+{
+	AddMovementInput(FVector(1.f, 0.f, 0.f), Value);
+}
+
+void AHeroCharacter::MoveRight(float Value)
+{
+	AddMovementInput(FVector(0.f, 1.f, 0.f), Value);
+}
+
+void AHeroCharacter::RotateCharacter(float Value)
+{
+	// If no controller return
+	if (Controller == nullptr)
+	{
+		return;
+	}
+
+	// Store in vectore value
+	LookVector = FVector(0.f, Value + LookVector.Y, 0.f);
+
+	// Reset values if more then circle
+	if (LookVector.Y > 360 || LookVector.Y < -360)
+	{
+		LookVector.Y = 0.f;
+	}
+
+	// Assign value to rotation
+	if (LookVector.Size() > MinLookVectorLenght)
+	{
+		Controller->SetControlRotation(FRotator(0.f, LookVector.Y, 0.f));
+	}
+}

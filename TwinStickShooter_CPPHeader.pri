@@ -8841,6 +8841,7 @@ HEADERS += \
 	"$$unrealRootPath/Engine/Plugins/Tests/ScreenshotTools/Source/ScreenshotTools/Public/ScreenshotTools.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/BaseCharacter.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/HeroCharacter.h" \
+	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/HeroController.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/TwinStickShooter_CPP.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/TwinStickShooter_CPPGameModeBase.h" \
  

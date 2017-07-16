@@ -16,6 +16,9 @@ class TWINSTICKSHOOTER_CPP_API AHeroCharacter : public ABaseCharacter
 
 public:
 	AHeroCharacter();
+
+
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	
 protected:
 	UPROPERTY(EditAnywhere, Category = "Hero Character")
@@ -23,4 +26,17 @@ protected:
 	
 	UPROPERTY(EditAnywhere, Category = "Hero Character")
 	class UCameraComponent* CameraComponent;
+
+// ------ Movement -------------------
+// -----------------------------------
+private:
+	void MoveUp(float Value);
+	void MoveRight(float Value);
+	void RotateCharacter(float Value);
+
+	FVector LookVector;
+
+	/** Min lenght of look vector */
+	UPROPERTY(EditDefaultsOnly, Category = "Hero Character", meta = (AllowPrivateAccess = "true"))
+	float MinLookVectorLenght = 0.25f;
 };
