@@ -6827,6 +6827,8 @@ SOURCES += \
 	"$$unrealRootPath/Engine/Plugins/Tests/RuntimeTests/Source/RuntimeTests/Private/Slate/RichTextMarkupProcessingTest.cpp" \
 	"$$unrealRootPath/Engine/Plugins/Tests/ScreenshotTools/Source/ScreenshotTools/Private/ScreenshotTools.cpp" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/BaseCharacter.cpp" \
+	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/EnemyAIController.cpp" \
+	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/EnemyCharacter.cpp" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/HeroCharacter.cpp" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/HeroController.cpp" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/TwinStickShooter_CPP.cpp" \
