@@ -2,12 +2,17 @@
 
 
 #include "HeroCharacter.h"
+#include "Weapon.h"
 
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
 #include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
+#include "Components/ArrowComponent.h"
+#include "Components/SkeletalMeshComponent.h"
+
+
 
 AHeroCharacter::AHeroCharacter()
 {
@@ -25,8 +30,33 @@ AHeroCharacter::AHeroCharacter()
 	CameraComponent->SetupAttachment(SpringArmComponent);
 	CameraComponent->AddRelativeLocation(FVector(-300.f, 0.f, 0.f));
 
+	// Add Arrow
+	GunTempComponent = CreateDefaultSubobject<UArrowComponent>(TEXT("GunTempComponent"));
+	GunTempComponent->SetupAttachment(RootComponent);
+	GunTempComponent->SetRelativeLocation(FVector(0.f, 45.f, 0.f));
+
+
 	// Set Player to be controller by lowest number player
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
+}
+
+void AHeroCharacter::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (BP_Weapon != nullptr)
+	{
+		FActorSpawnParameters SpawnParams;
+		SpawnParams.Owner = this;
+		SpawnParams.Instigator = Instigator;
+
+		FTransform Transform = GunTempComponent->GetComponentTransform();
+
+		Weapon = GetWorld()->SpawnActor<AWeapon>(BP_Weapon, Transform.GetLocation(), Transform.Rotator(), SpawnParams);
+		USkeletalMeshComponent* WeaponSkeletalMesh = Weapon->GetGunMeshComponent();
+
+		Weapon->AttachRootComponentTo(GunTempComponent, FName("GunTempComponent"), EAttachLocation::SnapToTarget, true);
+	}
 }
 
 
@@ -72,5 +102,17 @@ void AHeroCharacter::RotateCharacter(float Value)
 	if (LookVector.Size() > MinLookVectorLenght)
 	{
 		Controller->SetControlRotation(FRotator(0.f, LookVector.Y, 0.f));
+
+		if (Weapon != nullptr)
+		{
+			Weapon->PullTrigger();
+		}
+	}
+	else
+	{
+		if (Weapon != nullptr)
+		{
+			Weapon->ReleaseTrigger();
+		}
 	}
 }
