@@ -4,13 +4,14 @@
 
 #include "CoreMinimal.h"
 #include "BaseCharacter.h"
+#include "DamagableInterface.h"
 #include "HeroCharacter.generated.h"
 
 /**
  * 
  */
 UCLASS()
-class TWINSTICKSHOOTER_CPP_API AHeroCharacter : public ABaseCharacter
+class TWINSTICKSHOOTER_CPP_API AHeroCharacter : public ABaseCharacter, public IDamagableInterface
 {
 	GENERATED_BODY()
 
@@ -19,6 +20,9 @@ public:
 
 
 	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+	/** Implementation of Damage interface */
+	virtual void AffectHealth(float Delta) override;
 	
 protected:
 	UPROPERTY(EditAnywhere, Category = "Hero Character")
@@ -53,6 +57,8 @@ private:
 
 	class AWeapon* Weapon = nullptr;
 
+	/** Toogle space key */
 	bool bIsFire = false;
+	/** Toogle firing */
 	bool bIsFiring = false;
 };

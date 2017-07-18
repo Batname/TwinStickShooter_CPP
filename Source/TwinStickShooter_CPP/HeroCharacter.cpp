@@ -142,3 +142,17 @@ void AHeroCharacter::RotateCharacter(float Value)
 
 	OldVector = NewVector;
 }
+
+void AHeroCharacter::AffectHealth(float Delta)
+{
+	CalculateHealth(Delta);
+
+	if (bIsDead)
+	{
+		Destroy();
+		if (Weapon != nullptr)
+		{
+			Weapon->Destroy();
+		}
+	}
+}

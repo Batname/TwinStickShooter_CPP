@@ -27,7 +27,33 @@ private:
 	/** Sceletal mesh reference */
 	class USkeletalMeshComponent* SkeletalMesh;
 
+	/** Reference to Here character */
+	class AHeroCharacter* HeroCharacter = nullptr;
+
+	void DamageTheHero();
+
+
+	FTimerHandle DamageTimerHandle;
+
 protected:
 
+	/** Implementation of Damage interface */
 	virtual void AffectHealth(float Delta) override;
+
+	UPROPERTY(EditDefaultsOnly)
+	class UBoxComponent* DamageVolume;
+
+	/** Damage overlap function declaration */
+	UFUNCTION()
+	void OnDamageVolumeBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UFUNCTION()
+	void OnDamageVolumeEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
+
+	UPROPERTY(EditDefaultsOnly)
+	float Damage = 20.f;
+
+
+	UPROPERTY(EditDefaultsOnly)
+	float AttacksPerSecond = 2.f;
 };
