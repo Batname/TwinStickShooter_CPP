@@ -58,7 +58,8 @@ void AHeroCharacter::BeginPlay()
 		Weapon = GetWorld()->SpawnActor<AWeapon>(BP_Weapon, Transform.GetLocation(), Transform.Rotator(), SpawnParams);
 		USkeletalMeshComponent* WeaponSkeletalMesh = Weapon->GetGunMeshComponent();
 
-		Weapon->AttachRootComponentTo(GunTempComponent, FName("GunTempComponent"), EAttachLocation::SnapToTarget, true);
+		FAttachmentTransformRules TransformRules(EAttachmentRule::SnapToTarget, true);
+		Weapon->AttachToComponent(GunTempComponent, TransformRules, FName("GunTempComponent"));
 	}
 }
 
@@ -71,6 +72,20 @@ void AHeroCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputCompo
 	PlayerInputComponent->BindAxis("MoveRight", this, &AHeroCharacter::MoveRight);
 	PlayerInputComponent->BindAxis("LookUp", this, &AHeroCharacter::RotateCharacter);
 	PlayerInputComponent->BindAxis("LookRight", this, &AHeroCharacter::RotateCharacter);
+
+	PlayerInputComponent->BindAction("ToggleFire", IE_Pressed, this, &AHeroCharacter::ToggleFire);
+}
+
+void AHeroCharacter::ToggleFire()
+{
+	if (!bIsFire)
+	{
+		bIsFire = true;
+	}
+	else
+	{
+		bIsFire = false;
+	}
 }
 
 
@@ -93,13 +108,13 @@ void AHeroCharacter::RotateCharacter(float Value)
 	}
 
 	// Store in vectore value
-	NewVector = FVector(0.f, Value + OldVector.Y, 0.f);
+	NewVector = FVector(0.f, 3.f * Value + OldVector.Y, 0.f);
 
 	// Reset values if more then circle
 	if (NewVector.Y > 360 || NewVector.Y < -360)
 	{
 		NewVector.Y = 0.f;
-	}
+	} 
 
 	// Assign value to rotation
 	if ((NewVector - OldVector).Size() > MinLookVectorLenght)
@@ -107,9 +122,22 @@ void AHeroCharacter::RotateCharacter(float Value)
 		Controller->SetControlRotation(FRotator(0.f, NewVector.Y, 0.f));
 	}
 
+	// Toggle wepon logic
 	if (Weapon != nullptr)
 	{
-		Weapon->PullTrigger();
+		if (bIsFire)
+		{
+			if (!bIsFiring)
+			{
+				Weapon->PullTrigger();
+				bIsFiring = true;
+			}
+		}
+		else
+		{
+			Weapon->ReleaseTrigger();
+			bIsFiring = false;
+		}
 	}
 
 	OldVector = NewVector;

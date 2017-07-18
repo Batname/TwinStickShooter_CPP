@@ -50,6 +50,4 @@ public:
 
 private:
 	FTimerHandle SpawnProjectilesTimer;
-	
-	bool bIsTrigger = false;
 };

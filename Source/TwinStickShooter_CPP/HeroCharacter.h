@@ -42,6 +42,7 @@ private:
 	void MoveUp(float Value);
 	void MoveRight(float Value);
 	void RotateCharacter(float Value);
+	void ToggleFire();
 
 	FVector NewVector = FVector(0.f);
 	FVector OldVector = FVector(0.f);
@@ -53,4 +54,5 @@ private:
 	class AWeapon* Weapon = nullptr;
 
 	bool bIsFire = false;
+	bool bIsFiring = false;
 };

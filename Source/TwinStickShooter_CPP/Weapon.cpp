@@ -54,27 +54,19 @@ void AWeapon::Tick(float DeltaTime)
 
 void AWeapon::PullTrigger()
 {
-	if (!bIsTrigger)
-	{
-		FTimerDelegate TimerDel;
-		TimerDel.BindUFunction(this, TEXT("Fire"));
+	FTimerDelegate TimerDel;
+	TimerDel.BindUFunction(this, TEXT("Fire"));
 
-		GetWorld()->GetTimerManager().SetTimer(SpawnProjectilesTimer, TimerDel, 1.f / RoundsPerSecond, true);
-		bIsTrigger = true;
-	}
+	GetWorld()->GetTimerManager().SetTimer(SpawnProjectilesTimer, TimerDel, 1.f / RoundsPerSecond, true);
 }
 
 void AWeapon::ReleaseTrigger()
 {
-	if (!bIsTrigger)
-	{
-		GetWorldTimerManager().ClearTimer(SpawnProjectilesTimer);
-	}
+	GetWorldTimerManager().ClearTimer(SpawnProjectilesTimer);
 }
 
 void AWeapon::Fire()
 {
-
 	if (BP_Projectile == nullptr)
 	{
 		return;
