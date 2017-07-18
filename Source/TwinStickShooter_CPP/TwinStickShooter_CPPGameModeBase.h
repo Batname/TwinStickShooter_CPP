@@ -13,8 +13,17 @@ UCLASS()
 class TWINSTICKSHOOTER_CPP_API ATwinStickShooter_CPPGameModeBase : public AGameModeBase
 {
 	GENERATED_BODY()
+
+public:
+	UPROPERTY()
+	FTransform PlayerSpawnTransform;
 	
-	
-	
-	
+	/** Holds the logic for re-spawning player if he die */
+	UFUNCTION()
+	void RespawnPlayer();
+
+protected:
+	/** Reference to Player Character blueprint */
+	UPROPERTY(EditDefaultsOnly, Category = "GameMode")
+	TSubclassOf<class AHeroCharacter> BP_HeroCharacter;
 };

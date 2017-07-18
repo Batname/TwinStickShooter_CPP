@@ -61,4 +61,7 @@ private:
 	bool bIsFire = false;
 	/** Toogle firing */
 	bool bIsFiring = false;
+
+	/** Reference to game mode */
+	class ATwinStickShooter_CPPGameModeBase* GameModeBase;
 };

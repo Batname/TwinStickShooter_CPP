@@ -3,6 +3,7 @@
 
 #include "HeroCharacter.h"
 #include "Weapon.h"
+#include "TwinStickShooter_CPPGameModeBase.h"
 
 #include "GameFramework/SpringArmComponent.h"
 #include "Camera/CameraComponent.h"
@@ -11,6 +12,7 @@
 #include "GameFramework/Controller.h"
 #include "Components/ArrowComponent.h"
 #include "Components/SkeletalMeshComponent.h"
+#include "Kismet/GameplayStatics.h"
 
 
 
@@ -47,6 +49,7 @@ void AHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
+	// Setup weapon
 	if (BP_Weapon != nullptr)
 	{
 		FActorSpawnParameters SpawnParams;
@@ -60,6 +63,13 @@ void AHeroCharacter::BeginPlay()
 
 		FAttachmentTransformRules TransformRules(EAttachmentRule::SnapToTarget, true);
 		Weapon->AttachToComponent(GunTempComponent, TransformRules, FName("GunTempComponent"));
+	}
+
+	// Set PlayerSpawnTransform in GameMode
+	GameModeBase = Cast<ATwinStickShooter_CPPGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+	if (GameModeBase != nullptr)
+	{
+		GameModeBase->PlayerSpawnTransform = GetTransform();
 	}
 }
 
@@ -149,10 +159,18 @@ void AHeroCharacter::AffectHealth(float Delta)
 
 	if (bIsDead)
 	{
+		GameModeBase->RespawnPlayer();
+
 		Destroy();
 		if (Weapon != nullptr)
 		{
 			Weapon->Destroy();
 		}
+	}
+
+	// TODO just for test
+	if (GEngine)
+	{
+	     GEngine->AddOnScreenDebugMessage(-1, 25.0f, FColor::Red, FString("Player Health: ") + FString::SanitizeFloat(Health));  
 	}
 }
