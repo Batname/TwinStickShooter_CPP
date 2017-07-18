@@ -38,6 +38,9 @@ AHeroCharacter::AHeroCharacter()
 
 	// Set Player to be controller by lowest number player
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
+
+	// add actor tag
+	Tags.Add(FName("Friendly"));
 }
 
 void AHeroCharacter::BeginPlay()
@@ -90,29 +93,24 @@ void AHeroCharacter::RotateCharacter(float Value)
 	}
 
 	// Store in vectore value
-	LookVector = FVector(0.f, Value * 5.f + LookVector.Y, 0.f);
+	NewVector = FVector(0.f, Value + OldVector.Y, 0.f);
 
 	// Reset values if more then circle
-	if (LookVector.Y > 360 || LookVector.Y < -360)
+	if (NewVector.Y > 360 || NewVector.Y < -360)
 	{
-		LookVector.Y = 0.f;
+		NewVector.Y = 0.f;
 	}
 
 	// Assign value to rotation
-	if (LookVector.Size() > MinLookVectorLenght)
+	if ((NewVector - OldVector).Size() > MinLookVectorLenght)
 	{
-		Controller->SetControlRotation(FRotator(0.f, LookVector.Y, 0.f));
+		Controller->SetControlRotation(FRotator(0.f, NewVector.Y, 0.f));
+	}
 
-		if (Weapon != nullptr)
-		{
-			Weapon->PullTrigger();
-		}
-	}
-	else
+	if (Weapon != nullptr)
 	{
-		if (Weapon != nullptr)
-		{
-			Weapon->ReleaseTrigger();
-		}
+		Weapon->PullTrigger();
 	}
+
+	OldVector = NewVector;
 }

@@ -5,7 +5,7 @@
 
 #include "Components/SkeletalMeshComponent.h"
 #include "Materials/MaterialInstanceDynamic.h"
-
+#include "DamagableInterface.h"
 #include "GameFramework/CharacterMovementComponent.h"
 
 AEnemyCharacter::AEnemyCharacter()
@@ -28,5 +28,15 @@ void AEnemyCharacter::BeginPlay()
 		{
 			DynamicMatInstance->SetVectorParameterValue(FName("BodyColor"), FLinearColor(0.995f, 0.019f, 0.048f, 1.f));
 		}
+	}
+}
+
+void AEnemyCharacter::AffectHealth(float Delta)
+{
+	CalculateHealth(Delta);
+
+	if (bIsDead)
+	{
+		Destroy();
 	}
 }

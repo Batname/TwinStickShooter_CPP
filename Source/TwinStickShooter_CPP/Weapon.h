@@ -33,7 +33,7 @@ protected:
 	void Fire();
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = Weapon)
-	float RoundsPerSecond = 7.f;
+	float RoundsPerSecond = 5.f;
 
 public:	
 	// Called every frame

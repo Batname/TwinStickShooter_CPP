@@ -43,7 +43,8 @@ private:
 	void MoveRight(float Value);
 	void RotateCharacter(float Value);
 
-	FVector LookVector;
+	FVector NewVector = FVector(0.f);
+	FVector OldVector = FVector(0.f);
 
 	/** Min lenght of look vector */
 	UPROPERTY(EditDefaultsOnly, Category = "Hero Character", meta = (AllowPrivateAccess = "true"))
@@ -51,4 +52,5 @@ private:
 
 	class AWeapon* Weapon = nullptr;
 
+	bool bIsFire = false;
 };

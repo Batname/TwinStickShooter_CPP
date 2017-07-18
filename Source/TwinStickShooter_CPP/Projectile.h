@@ -30,7 +30,13 @@ protected:
 
 	/** Projectile movement component */
 	UPROPERTY(EditDefaultsOnly, Category = Projectile)
-	class UProjectileMovementComponent* ProjectileMovementComponent; 
+	class UProjectileMovementComponent* ProjectileMovementComponent;
+
+	UFUNCTION()
+	void OnBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);
+
+	UPROPERTY(EditDefaultsOnly)
+	float Damage = 20.0f;
 
 public:	
 	// Called every frame

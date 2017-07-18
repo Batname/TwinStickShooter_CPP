@@ -50,7 +50,6 @@ void AWeapon::BeginPlay()
 void AWeapon::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
 
 void AWeapon::PullTrigger()
@@ -63,13 +62,14 @@ void AWeapon::PullTrigger()
 		GetWorld()->GetTimerManager().SetTimer(SpawnProjectilesTimer, TimerDel, 1.f / RoundsPerSecond, true);
 		bIsTrigger = true;
 	}
-
 }
 
 void AWeapon::ReleaseTrigger()
 {
-	GetWorldTimerManager().ClearTimer(SpawnProjectilesTimer);
-	bIsTrigger = false;
+	if (!bIsTrigger)
+	{
+		GetWorldTimerManager().ClearTimer(SpawnProjectilesTimer);
+	}
 }
 
 void AWeapon::Fire()
