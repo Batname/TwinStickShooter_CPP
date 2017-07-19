@@ -10,10 +10,9 @@
 #include "Components/InputComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
-#include "Components/ArrowComponent.h"
 #include "Components/SkeletalMeshComponent.h"
 #include "Kismet/GameplayStatics.h"
-
+#include "Components/SkeletalMeshComponent.h"
 
 AHeroCharacter::AHeroCharacter()
 {
@@ -31,17 +30,13 @@ AHeroCharacter::AHeroCharacter()
 	CameraComponent->SetupAttachment(SpringArmComponent);
 	CameraComponent->AddRelativeLocation(FVector(-300.f, 0.f, 0.f));
 
-	// Add Arrow
-	GunTempComponent = CreateDefaultSubobject<UArrowComponent>(TEXT("GunTempComponent"));
-	GunTempComponent->SetupAttachment(RootComponent);
-	GunTempComponent->SetRelativeLocation(FVector(0.f, 45.f, 0.f));
-
-
 	// Set Player to be controller by lowest number player
 	AutoPossessPlayer = EAutoReceiveInput::Player0;
 
 	// add actor tag
 	Tags.Add(FName("Friendly"));
+
+	SkeletalMesh = GetMesh();
 }
 
 void AHeroCharacter::BeginPlay()
@@ -55,13 +50,16 @@ void AHeroCharacter::BeginPlay()
 		SpawnParams.Owner = this;
 		SpawnParams.Instigator = Instigator;
 
-		FTransform Transform = GunTempComponent->GetComponentTransform();
+		if (SkeletalMesh != nullptr)
+		{
+			FTransform Transform = SkeletalMesh->GetComponentTransform();
+			Weapon = GetWorld()->SpawnActor<AWeapon>(BP_Weapon, Transform.GetLocation(), Transform.Rotator(), SpawnParams);
+			
+			FAttachmentTransformRules TransformRules(EAttachmentRule::SnapToTarget, true);
+			Weapon->AttachToComponent(SkeletalMesh, TransformRules, FName("GunSocket"));
+		}
 
-		Weapon = GetWorld()->SpawnActor<AWeapon>(BP_Weapon, Transform.GetLocation(), Transform.Rotator(), SpawnParams);
-		USkeletalMeshComponent* WeaponSkeletalMesh = Weapon->GetGunMeshComponent();
-
-		FAttachmentTransformRules TransformRules(EAttachmentRule::SnapToTarget, true);
-		Weapon->AttachToComponent(GunTempComponent, TransformRules, FName("GunTempComponent"));
+		// USkeletalMeshComponent* WeaponSkeletalMesh = Weapon->GetGunMeshComponent();
 	}
 
 	// Set PlayerSpawnTransform in GameMode

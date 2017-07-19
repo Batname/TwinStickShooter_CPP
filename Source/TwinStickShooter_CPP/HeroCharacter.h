@@ -31,9 +31,6 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Hero Character")
 	class UCameraComponent* CameraComponent;
 
-	UPROPERTY(EditDefaultsOnly, Category = "Hero Character")
-	class UArrowComponent* GunTempComponent;
-
 	/** The projectile to spawn */
 	UPROPERTY(EditDefaultsOnly, Category = "Hero Character")
 	TSubclassOf<class AWeapon> BP_Weapon;
@@ -64,4 +61,7 @@ private:
 
 	/** Reference to game mode */
 	class ATwinStickShooter_CPPGameModeBase* GameModeBase;
+
+	/** Reference to sceletal mesh */
+	class USkeletalMeshComponent* SkeletalMesh;
 };

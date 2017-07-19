@@ -33,7 +33,7 @@ protected:
 
 	/** Number of dead animation from 0 up to 2*/
 	UPROPERTY(BlueprintReadOnly)
-	int8 DeadAnimNum = 0;
+	int32 DeadAnimNum = 0;
 
 	/** Holds the current pawn delta yaw */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)

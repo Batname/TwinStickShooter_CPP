@@ -30,12 +30,12 @@ AWeapon::AWeapon()
 		GunMeshComponent->SetSkeletalMesh(SK_FPGun.Object);
 	}
 
-	GunMeshComponent->SetRelativeRotation(FRotator(0.f, 270.f, 0.f));
+	GunMeshComponent->SetRelativeRotation(FRotator(0.f, 0.f, 0.f));
 
 	ArrowComponent = CreateDefaultSubobject<UArrowComponent>(TEXT("ArrowComponent"));
 	ArrowComponent->SetupAttachment(GunMeshComponent);
 	ArrowComponent->SetRelativeRotation(FRotator(0.f, 90.f, 0.f));
-	ArrowComponent->SetRelativeLocation(FVector(0.f, 0.f, 10.f));
+	ArrowComponent->SetRelativeLocation(FVector(0.f, 50.f, 10.f));
 
 
 }
