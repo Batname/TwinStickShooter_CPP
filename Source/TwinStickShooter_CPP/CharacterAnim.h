@@ -27,13 +27,22 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FRotator ControlRotation;
 
+	/** Holds the current pawn control rotation of our character */
+	UPROPERTY(BlueprintReadOnly)
+	bool bIsDead = false;
+
+	/** Number of dead animation from 0 up to 2*/
+	UPROPERTY(BlueprintReadOnly)
+	int8 DeadAnimNum = 0;
 
 	/** Holds the current pawn delta yaw */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	float Direction;
 
-
 	/** Updates the above parameters */
 	UFUNCTION(BlueprintCallable, Category = UpdateAnimationProperties)
 	void UpdateAnimationProperties();
+
+private:
+	bool bIsDeadAnimStart = false;
 };

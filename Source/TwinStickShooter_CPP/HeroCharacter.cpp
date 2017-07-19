@@ -15,7 +15,6 @@
 #include "Kismet/GameplayStatics.h"
 
 
-
 AHeroCharacter::AHeroCharacter()
 {
 	// Add Spring arm camera
@@ -157,15 +156,28 @@ void AHeroCharacter::AffectHealth(float Delta)
 {
 	CalculateHealth(Delta);
 
-	if (bIsDead)
+	if (bIsDead && !bIsDeadRestarting)
 	{
-		GameModeBase->RespawnPlayer();
+		// Disable input
+		DisableInput(GetWorld()->GetFirstPlayerController());
 
-		Destroy();
-		if (Weapon != nullptr)
+		// Die after delay
+		FTimerHandle TimerHandle;
+		FTimerDelegate TimerDel;
+
+		TimerDel.BindLambda([&]
 		{
-			Weapon->Destroy();
-		}
+			Destroy();
+			if (Weapon != nullptr)
+			{
+				Weapon->Destroy();
+			}
+
+			GameModeBase->RespawnPlayer();
+		});
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, TimerDel, 3.f, false);
+
+		bIsDeadRestarting = true;
 	}
 
 	// TODO just for test

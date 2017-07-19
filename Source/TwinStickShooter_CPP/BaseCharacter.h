@@ -33,6 +33,10 @@ public:
 	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
 #endif
 
+	/** Get state of dead restarting */
+	UFUNCTION(BlueprintCallable, Category = "Base Character")
+	bool IsDeadRestarting() { return bIsDeadRestarting; }
+
 public:
 	// Sets default values for this character's properties
 	ABaseCharacter();
@@ -40,6 +44,8 @@ public:
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
+
+	bool bIsDeadRestarting = false;
 
 public:	
 	// Called every frame
