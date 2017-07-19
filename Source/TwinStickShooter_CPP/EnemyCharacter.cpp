@@ -8,6 +8,7 @@
 #include "Materials/MaterialInstanceDynamic.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/BoxComponent.h"
+#include "Components/CapsuleComponent.h"
 
 AEnemyCharacter::AEnemyCharacter()
 {
@@ -51,9 +52,28 @@ void AEnemyCharacter::AffectHealth(float Delta)
 {
 	CalculateHealth(Delta);
 
-	if (bIsDead)
+	if (bIsDead && !bIsDeadRestarting)
 	{
-		Destroy();
+		// Disable collision
+		UCapsuleComponent* CapsuleComponent = GetCapsuleComponent();
+		CapsuleComponent->SetCollisionResponseToChannel(ECollisionChannel::ECC_WorldDynamic, ECollisionResponse::ECR_Ignore);
+		CapsuleComponent->SetCollisionResponseToChannel(ECollisionChannel::ECC_Pawn, ECollisionResponse::ECR_Ignore);
+
+		// Detach controller
+		DetachFromControllerPendingDestroy();
+
+		// Die after delay
+		FTimerHandle TimerHandle;
+		FTimerDelegate TimerDel;
+
+		TimerDel.BindLambda([&]
+		{
+			Destroy();
+		});
+
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, TimerDel, 3.f, false);
+
+		bIsDeadRestarting = true;
 	}
 }
 
