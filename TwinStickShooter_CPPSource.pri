@@ -6830,6 +6830,7 @@ SOURCES += \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/DamagableInterface.cpp" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/EnemyAIController.cpp" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/EnemyCharacter.cpp" \
+	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/EnemySpawner.cpp" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/HeroCharacter.cpp" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/HeroController.cpp" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/Projectile.cpp" \

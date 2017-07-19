@@ -8843,6 +8843,7 @@ HEADERS += \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/DamagableInterface.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/EnemyAIController.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/EnemyCharacter.h" \
+	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/EnemySpawner.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/HeroCharacter.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/HeroController.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/Projectile.h" \

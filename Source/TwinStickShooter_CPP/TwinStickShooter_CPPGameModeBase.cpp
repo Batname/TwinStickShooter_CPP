@@ -3,6 +3,7 @@
 
 #include "TwinStickShooter_CPPGameModeBase.h"
 #include "HeroCharacter.h"
+#include "EnemySpawner.h"
 
 #include "Kismet/GameplayStatics.h"
 
@@ -21,3 +22,23 @@ void ATwinStickShooter_CPPGameModeBase::RespawnPlayer()
 	}
 }
 
+void ATwinStickShooter_CPPGameModeBase::BeginPlay()
+{
+	Super::BeginPlay();
+
+	TArray<AActor*> FoundActors;
+
+	// TODO Only for one Enemy spawner
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemySpawner::StaticClass(), FoundActors);
+	for (auto Actor : FoundActors)
+	{
+		EnemySpawner = Cast<AEnemySpawner>(Actor);
+	}
+
+	if (EnemySpawner != nullptr)
+	{
+		FTimerHandle TimerHandle;
+
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, EnemySpawner, &AEnemySpawner::SpawnEnemy, (1.f / EnemiesPerSecond), true);
+	}
+}

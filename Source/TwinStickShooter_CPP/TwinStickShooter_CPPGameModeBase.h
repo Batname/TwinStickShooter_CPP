@@ -26,4 +26,14 @@ protected:
 	/** Reference to Player Character blueprint */
 	UPROPERTY(EditDefaultsOnly, Category = "GameMode")
 	TSubclassOf<class AHeroCharacter> BP_HeroCharacter;
+
+
+	virtual void BeginPlay() override;
+
+	float EnemiesPerSecond = 2.f;
+
+private:
+	/** Reference to spawn volume actor */
+	UPROPERTY()
+	class AEnemySpawner* EnemySpawner;
 };

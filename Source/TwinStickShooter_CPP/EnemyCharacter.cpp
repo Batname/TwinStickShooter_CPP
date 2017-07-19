@@ -23,6 +23,9 @@ AEnemyCharacter::AEnemyCharacter()
 	DamageVolume->SetCollisionProfileName(FName("OverlapOnlyPawn"));
 	DamageVolume->SetRelativeLocation(FVector(80.f, 0.f, -65.f));
 	DamageVolume->SetRelativeScale3D(FVector(1.f, 1.f, 0.5f));
+
+	// Set as spawned in world
+	AutoPossessAI = EAutoPossessAI::PlacedInWorldOrSpawned;
 }
 
 void AEnemyCharacter::BeginPlay()
@@ -73,5 +76,8 @@ void AEnemyCharacter::OnDamageVolumeEndOverlap(UPrimitiveComponent* OverlappedCo
 
 void AEnemyCharacter::DamageTheHero()
 {
-	HeroCharacter->AffectHealth(-Damage);
+	if (HeroCharacter != nullptr)
+	{
+		HeroCharacter->AffectHealth(-Damage);
+	}
 }
