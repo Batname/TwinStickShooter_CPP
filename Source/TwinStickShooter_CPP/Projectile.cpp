@@ -27,7 +27,7 @@ AProjectile::AProjectile()
 	ProjectileCollision->SetupAttachment(RootComponent);
 	ProjectileCollision->bGenerateOverlapEvents = true;
 	ProjectileCollision->SetSphereRadius(10.f);
-	ProjectileCollision->SetCollisionProfileName(FName("OverlapAllDynamic"));
+	ProjectileCollision->SetCollisionProfileName(FName("OverlapOnlyPawn"));
 	ProjectileCollision->SetCollisionEnabled(ECollisionEnabled::QueryAndPhysics);
 	ProjectileCollision->SetRelativeLocation(FVector(15.f, 0.f, 0.f));
 
@@ -52,6 +52,9 @@ AProjectile::AProjectile()
 	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMovementComponent"));
 	ProjectileMovementComponent->InitialSpeed = 1200.f;
 	ProjectileMovementComponent->ProjectileGravityScale = 0.f;
+
+	// Set init span life
+	InitialLifeSpan = 1.5f;
 }
 
 // Called when the game starts or when spawned

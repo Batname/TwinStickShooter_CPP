@@ -4,11 +4,20 @@
 #include "TwinStickShooter_CPPGameModeBase.h"
 #include "HeroCharacter.h"
 #include "EnemySpawner.h"
+#include "EnemyCharacter.h"
 
 #include "Kismet/GameplayStatics.h"
 
 void ATwinStickShooter_CPPGameModeBase::RespawnPlayer()
 {
+	// Destroy enemies
+	TArray<AActor*> FoundEnemyActors;
+	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemyCharacter::StaticClass(), FoundEnemyActors);
+	for (auto Actor : FoundEnemyActors)
+	{
+		Actor->Destroy();
+	}
+
 	FActorSpawnParameters SpawnParams;
 	SpawnParams.Owner = this;
 	SpawnParams.Instigator = Instigator;
