@@ -8840,6 +8840,7 @@ HEADERS += \
 	"$$unrealRootPath/Engine/Plugins/Tests/RuntimeTests/Source/RuntimeTests/Public/RuntimeTests.h" \
 	"$$unrealRootPath/Engine/Plugins/Tests/ScreenshotTools/Source/ScreenshotTools/Public/ScreenshotTools.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/BaseCharacter.h" \
+	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/CharacterAnim.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/DamagableInterface.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/EnemyAIController.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/EnemyCharacter.h" \
