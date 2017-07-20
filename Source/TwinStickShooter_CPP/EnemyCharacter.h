@@ -35,6 +35,8 @@ private:
 
 	FTimerHandle DamageTimerHandle;
 
+	class ATwinStickShooter_CPPGameModeBase* GameModeBase;
+
 protected:
 
 	/** Implementation of Damage interface */
@@ -51,8 +53,7 @@ protected:
 	void OnDamageVolumeEndOverlap(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex);
 
 	UPROPERTY(EditDefaultsOnly)
-	float Damage = 20.f;
-
+	float EnemyDamage = 20.f;
 
 	UPROPERTY(EditDefaultsOnly)
 	float AttacksPerSecond = 2.f;

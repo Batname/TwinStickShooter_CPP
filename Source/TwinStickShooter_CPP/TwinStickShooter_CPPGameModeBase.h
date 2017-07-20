@@ -22,6 +22,15 @@ public:
 	UFUNCTION()
 	void RespawnPlayer();
 
+	UFUNCTION()
+	void IncrementScore();
+
+	UFUNCTION()
+	int GetScore() { return Score; }
+
+	UFUNCTION()
+	void SetScoreZero() { Score = 0; }
+
 protected:
 	/** Reference to Player Character blueprint */
 	UPROPERTY(EditDefaultsOnly, Category = "GameMode")
@@ -31,6 +40,19 @@ protected:
 	virtual void BeginPlay() override;
 
 	float EnemiesPerSecond = 2.f;
+
+	/*Property which is pointing to our Widget Blueprint in order to instantiate it using c++*/
+	UPROPERTY(EditDefaultsOnly, Category = "GameMode")
+	TSubclassOf<class UTwinSkickWidget> BP_TwinSkickWidget;
+
+
+	/** Reference to Player Character blueprint */
+	UPROPERTY(VisibleAnywhere, Category = "GameMode")
+	int Score = 0;
+
+	/** Reference to Player Character blueprint */
+	UPROPERTY(EditDefaultsOnly, Category = "GameMode")
+	int DeltaScore = 500;
 
 private:
 	/** Reference to spawn volume actor */

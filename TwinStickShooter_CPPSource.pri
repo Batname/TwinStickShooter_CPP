@@ -6835,6 +6835,7 @@ SOURCES += \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/HeroCharacter.cpp" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/HeroController.cpp" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/Projectile.cpp" \
+	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/TwinSkickWidget.cpp" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/TwinStickShooter_CPP.cpp" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/TwinStickShooter_CPPGameModeBase.cpp" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/Weapon.cpp" \

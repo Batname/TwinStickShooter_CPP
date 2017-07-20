@@ -86,5 +86,5 @@ void AProjectile::OnBeginOverlap(UPrimitiveComponent* OverlappedComp, AActor* Ot
 
 	// Cast to interface object and affect health
 	IDamagableInterface* ReactingObject = Cast<IDamagableInterface>(OtherActor);
-	ReactingObject->AffectHealth(-Damage);
+	ReactingObject->AffectHealth(-ProjectileDamage);
 }

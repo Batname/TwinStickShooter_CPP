@@ -5,6 +5,7 @@
 #include "HeroCharacter.h"
 #include "EnemySpawner.h"
 #include "EnemyCharacter.h"
+#include "TwinSkickWidget.h"
 
 #include "Kismet/GameplayStatics.h"
 
@@ -29,6 +30,9 @@ void ATwinStickShooter_CPPGameModeBase::RespawnPlayer()
 	{
 		PlayerController->Possess(HeroCharacter);
 	}
+
+	// Set score zero
+	SetScoreZero();
 }
 
 void ATwinStickShooter_CPPGameModeBase::BeginPlay()
@@ -50,4 +54,16 @@ void ATwinStickShooter_CPPGameModeBase::BeginPlay()
 
 		GetWorld()->GetTimerManager().SetTimer(TimerHandle, EnemySpawner, &AEnemySpawner::SpawnEnemy, (1.f / EnemiesPerSecond), true);
 	}
+
+	// Crteate user widget
+	if (BP_TwinSkickWidget != nullptr)
+	{
+		UTwinSkickWidget* TwinSkickWidget = CreateWidget<UTwinSkickWidget>(GetWorld(), BP_TwinSkickWidget);
+		TwinSkickWidget->AddToViewport();
+	}
+}
+
+void ATwinStickShooter_CPPGameModeBase::IncrementScore()
+{
+	Score += DeltaScore;
 }

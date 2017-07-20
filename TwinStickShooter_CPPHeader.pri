@@ -8848,6 +8848,7 @@ HEADERS += \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/HeroCharacter.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/HeroController.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/Projectile.h" \
+	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/TwinSkickWidget.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/TwinStickShooter_CPP.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/TwinStickShooter_CPPGameModeBase.h" \
 	"$$TwinStickShooter_CPPRootPath/Source/TwinStickShooter_CPP/Weapon.h" \

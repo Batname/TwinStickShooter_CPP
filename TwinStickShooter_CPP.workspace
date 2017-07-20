@@ -3900,6 +3900,25 @@
     <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/AudioMixer/Public/DSP" />
     <Include Path="/home/bat/Apps/UnrealEngine/Engine/Intermediate/Build/Linux/B4D820EA/UE4Editor/Inc/AudioMixer" />
     <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/AudioMixer" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/UMG/Public" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/UMG/Public/Animation" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/UMG/Public/Binding" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/UMG/Public/Blueprint" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/UMG/Public/Components" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/UMG/Public/Slate" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Intermediate/Build/Linux/B4D820EA/UE4Editor/Inc/UMG" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/UMG" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/MovieScene/Public" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/MovieScene/Public/Compilation" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/MovieScene/Public/Evaluation" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Intermediate/Build/Linux/B4D820EA/UE4Editor/Inc/MovieScene" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/MovieScene" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/MovieSceneTracks/Public" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/MovieSceneTracks/Public/Evaluation" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/MovieSceneTracks/Public/Sections" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/MovieSceneTracks/Public/Tracks" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Intermediate/Build/Linux/B4D820EA/UE4Editor/Inc/MovieSceneTracks" />
+    <Include Path="/home/bat/Apps/UnrealEngine/Engine/Source/Runtime/MovieSceneTracks" />
   </WorkspaceParserPaths>
   <Project Name="UE4Client" Path="Intermediate/ProjectFiles/UE4Client.project" Active="No" />
   <Project Name="UE4Editor" Path="Intermediate/ProjectFiles/UE4Editor.project" Active="No" />

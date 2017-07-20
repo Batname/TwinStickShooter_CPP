@@ -58,8 +58,6 @@ void AHeroCharacter::BeginPlay()
 			FAttachmentTransformRules TransformRules(EAttachmentRule::SnapToTarget, true);
 			Weapon->AttachToComponent(SkeletalMesh, TransformRules, FName("GunSocket"));
 		}
-
-		// USkeletalMeshComponent* WeaponSkeletalMesh = Weapon->GetGunMeshComponent();
 	}
 
 	// Set PlayerSpawnTransform in GameMode
@@ -176,11 +174,5 @@ void AHeroCharacter::AffectHealth(float Delta)
 		GetWorld()->GetTimerManager().SetTimer(TimerHandle, TimerDel, 3.f, false);
 
 		bIsDeadRestarting = true;
-	}
-
-	// TODO just for test
-	if (GEngine)
-	{
-	     GEngine->AddOnScreenDebugMessage(-1, 25.0f, FColor::Red, FString("Player Health: ") + FString::SanitizeFloat(Health));  
 	}
 }

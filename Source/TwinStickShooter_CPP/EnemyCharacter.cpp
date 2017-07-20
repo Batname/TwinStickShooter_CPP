@@ -3,12 +3,16 @@
 
 #include "EnemyCharacter.h"
 #include "HeroCharacter.h"
+#include "TwinStickShooter_CPPGameModeBase.h"
+
 
 #include "Components/SkeletalMeshComponent.h"
 #include "Materials/MaterialInstanceDynamic.h"
 #include "GameFramework/CharacterMovementComponent.h"
 #include "Components/BoxComponent.h"
 #include "Components/CapsuleComponent.h"
+#include "Kismet/GameplayStatics.h"
+
 
 AEnemyCharacter::AEnemyCharacter()
 {
@@ -46,6 +50,8 @@ void AEnemyCharacter::BeginPlay()
 
 	DamageVolume->OnComponentBeginOverlap.AddDynamic(this, &AEnemyCharacter::OnDamageVolumeBeginOverlap);
 	DamageVolume->OnComponentEndOverlap.AddDynamic(this, &AEnemyCharacter::OnDamageVolumeEndOverlap);
+
+	GameModeBase = Cast<ATwinStickShooter_CPPGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
 }
 
 void AEnemyCharacter::AffectHealth(float Delta)
@@ -61,6 +67,12 @@ void AEnemyCharacter::AffectHealth(float Delta)
 
 		// Detach controller
 		DetachFromControllerPendingDestroy();
+
+		// Increment score
+		if (GameModeBase != nullptr)
+		{
+			GameModeBase->IncrementScore();
+		}
 
 		// Die after delay
 		FTimerHandle TimerHandle;
@@ -98,6 +110,6 @@ void AEnemyCharacter::DamageTheHero()
 {
 	if (HeroCharacter != nullptr)
 	{
-		HeroCharacter->AffectHealth(-Damage);
+		HeroCharacter->AffectHealth(-EnemyDamage);
 	}
 }
