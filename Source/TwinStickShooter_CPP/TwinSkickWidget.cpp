@@ -4,10 +4,18 @@
 #include "TwinSkickWidget.h"
 #include "BaseCharacter.h"
 #include "TwinStickShooter_CPPGameModeBase.h"
+#include "EnemySpawner.h"
 
 
 #include "Kismet/GameplayStatics.h"
 
+
+void UTwinSkickWidget::NativeConstruct()
+{
+	Super::NativeConstruct();
+
+	GameModeBase = Cast<ATwinStickShooter_CPPGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
+}
 
 float UTwinSkickWidget::GetHeroHealth()
 {
@@ -22,13 +30,22 @@ float UTwinSkickWidget::GetHeroHealth()
 
 FText UTwinSkickWidget::GetHeroScore()
 {
-	ATwinStickShooter_CPPGameModeBase* GameModeBase = Cast<ATwinStickShooter_CPPGameModeBase>(UGameplayStatics::GetGameMode(GetWorld()));
-
 	if (GameModeBase != nullptr)
 	{
 		return FText::AsNumber(GameModeBase->GetScore());
-
 	}
 
 	return FText::GetEmpty();
+}
+
+FText UTwinSkickWidget::GetEnemiesCount()
+{
+	if (GameModeBase != nullptr && GameModeBase->GetEnemySpawner() != nullptr)
+	{
+		return FText::AsNumber(GameModeBase->GetEnemySpawner()->GetEnemiesOnScene());
+	}
+
+
+	return FText::GetEmpty();
+
 }

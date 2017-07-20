@@ -31,6 +31,8 @@ public:
 	UFUNCTION()
 	void SetScoreZero() { Score = 0; }
 
+	class AEnemySpawner* GetEnemySpawner() { return EnemySpawner; }
+
 protected:
 	/** Reference to Player Character blueprint */
 	UPROPERTY(EditDefaultsOnly, Category = "GameMode")

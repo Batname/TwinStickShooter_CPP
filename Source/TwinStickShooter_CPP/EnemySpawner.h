@@ -18,6 +18,8 @@ public:
 	UFUNCTION()
 	void SpawnEnemy();
 
+	uint32 GetEnemiesOnScene() { return EnemiesOnScene; }
+
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -39,4 +41,5 @@ public:
 private:
 	FVector GetRandomPointInVolume();
 
+	uint32 EnemiesOnScene = 0;
 };

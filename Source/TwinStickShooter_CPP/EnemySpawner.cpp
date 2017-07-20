@@ -34,6 +34,18 @@ void AEnemySpawner::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+	// increase enemies on scene
+	{
+		FTimerHandle TimerHandle;
+		FTimerDelegate TimerDel;
+
+		TimerDel.BindLambda([&]
+		{
+			MaxEnemyOnScene++;
+		});
+
+		GetWorld()->GetTimerManager().SetTimer(TimerHandle, TimerDel, FMath::FRandRange(5.f, 10.f), true);
+	}
 }
 
 void AEnemySpawner::SpawnEnemy()
@@ -41,9 +53,9 @@ void AEnemySpawner::SpawnEnemy()
 	// Check limit of enemies
 	TArray<AActor*> FoundActors;
 	UGameplayStatics::GetAllActorsOfClass(GetWorld(), AEnemyCharacter::StaticClass(), FoundActors);
-	int32 FoundActorsLen = FoundActors.Num();
+	EnemiesOnScene = FoundActors.Num();
 
-	if (FoundActorsLen >= MaxEnemyOnScene)
+	if (EnemiesOnScene >= MaxEnemyOnScene)
 	{
 		return;
 	}
@@ -80,4 +92,3 @@ FVector AEnemySpawner::GetRandomPointInVolume()
 
 	return UKismetMathLibrary::RandomPointInBoundingBox(SpawnOrigin, SpawnExtend);
 }
-

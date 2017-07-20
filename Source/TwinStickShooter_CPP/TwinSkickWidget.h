@@ -15,11 +15,18 @@ class TWINSTICKSHOOTER_CPP_API UTwinSkickWidget : public UUserWidget
 	GENERATED_BODY()
 	
 protected:
+	virtual void NativeConstruct() override;
+
+
 	UFUNCTION(BlueprintCallable, Category = HeroHealth)
 	float GetHeroHealth();
 
 	UFUNCTION(BlueprintCallable, Category = HeroScore)
 	FText GetHeroScore();
 
+	UFUNCTION(BlueprintCallable, Category = EnemiesCount)
+	FText GetEnemiesCount();
+
 private:
+	class ATwinStickShooter_CPPGameModeBase* GameModeBase;
 };
